@@ -33,8 +33,19 @@
 
       <div class="searchArea">
         <form action="###" class="searchForm">
-          <input type="text" id="autocomplete" class="input-error input-xxlarge" v-model="keyword" />
-          <button class="sui-btn btn-xlarge btn-danger" type="button" @click="search">搜索</button>
+          <input
+            type="text"
+            id="autocomplete"
+            class="input-error input-xxlarge"
+            v-model="keyword"
+          />
+          <button
+            class="sui-btn btn-xlarge btn-danger"
+            type="button"
+            @click="search"
+          >
+            搜索
+          </button>
         </form>
       </div>
     </div>
@@ -46,7 +57,7 @@ export default {
   name: "Header",
   data() {
     return {
-      keyword: ""
+      keyword: "",
     };
   },
   methods: {
@@ -55,23 +66,23 @@ export default {
       // this.$router.push(`/search/${keyword}?keyword2=${keyword.toUpperCase()}`);
 
       const location = {
-        name: "search"
+        name: "search",
       };
       if (keyword) {
-        (location.params = { keyword }),
-          (location.query = { keyword2: keyword.toUpperCase() });
+        location.params = { keyword };
       }
       // this.$router.push(location, (
 
       // ) => {});
-      this.$router.push(location);
+      location.query = this.$router.query;
       // this.$router.push({
       //   name: "search",
       //   params: { keyword: keyword },
       //   query: { keyword2: keyword.toUpperCase() },
       // });
-    }
-  }
+      this.$router.push(location);
+    },
+  },
 };
 </script>
 

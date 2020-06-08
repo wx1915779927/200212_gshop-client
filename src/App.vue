@@ -9,6 +9,7 @@
 <script type="text/ecmascript-6">
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import {reqCategroyList,reqBanner,reqFloors} from './api'
 // import {reqCategroyList} from './api'
 export default {
   name: "App",
@@ -17,6 +18,10 @@ export default {
     //测试接口请求函数获取数据
     // const result = await reqCategroyList()
     // console.log('result',result)
+    this.$store.dispatch('getCategoryList')
+    const result = await reqFloors()
+    console.log('result',result)
+
   },
 
   components: {
