@@ -27,11 +27,11 @@
 
 <script>
 export default {
-  name: "TodayRecommend",
-};
+  name: 'TodayRecommend',
+}
 </script>
 
-<style lang="less" scoped>
+<style  lang="less" scoped>
 .today-recommend {
   .py-container {
     width: 1200px;
