@@ -85,35 +85,14 @@
               </li>
             </ul>
           </div>
-          <div class="fr page">
-            <div class="sui-pagination clearfix">
-              <ul>
-                <li class="prev disabled">
-                  <a href="#">«上一页</a>
-                </li>
-                <li class="active">
-                  <a href="#">1</a>
-                </li>
-                <li>
-                  <a href="#">2</a>
-                </li>
-                <li>
-                  <a href="#">3</a>
-                </li>
-                <li>
-                  <a href="#">4</a>
-                </li>
-                <li>
-                  <a href="#">5</a>
-                </li>
-                <li class="dotted"><span>...</span></li>
-                <li class="next">
-                  <a href="#">下一页»</a>
-                </li>
-              </ul>
-              <div><span>共10页&nbsp;</span></div>
-            </div>
-          </div>
+
+          <Pagination
+            :currentPage="options.pageNo"
+            :pageSize="options.pageSize"
+            :total="productList.total"
+            :showPageNo="5"
+            @currentChange="getProductList"
+          />
         </div>
       </div>
     </div>
@@ -139,7 +118,7 @@ export default {
         order: "1:desc", // 排序方式  1: 综合,2: 价格 asc: 升序,desc: 降序  "1:desc"
 
         pageNo: 1, // 页码
-        pageSize: 5,
+        pageSize: 2,
       },
     };
   },
@@ -148,6 +127,7 @@ export default {
     SearchSelector,
   },
   created() {
+    this.updateOptions();
     this.getProductList();
   },
   computed: {
@@ -155,10 +135,40 @@ export default {
       productList: (state) => state.search.productList,
     }),
   },
+  // watch: {
+  //   $route(to, from) {
+  //     this.updateOptions();
+  //     this.getProductList();
+  //   },
+  // },
   methods: {
-    getProductList() {
+    updateOptions() {
+      const {
+        categoryName = "",
+        category1Id = "",
+        category2Id = "",
+        category3Id = "",
+      } = this.$route.query;
+      const { keyword = "" } = this.$route.params;
+
+      this.options = {
+        ...this.options,
+        categoryName,
+        category1Id,
+        category2Id,
+        category3Id,
+        keyword,
+      };
+    },
+
+    getProductList(pageNo = 1) {
+      this.options.pageNo = pageNo;
       this.$store.dispatch("getProductList", this.options);
     },
+
+    // handleCurrentChange(page){
+
+    // }
   },
 };
 </script>

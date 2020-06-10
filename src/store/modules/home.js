@@ -4,7 +4,8 @@
 import {
     reqCategoryList,
     reqBanners,
-    reqFloors
+    reqFloors,
+    reqRecommends
 } from '@/api'
 
 export default {
@@ -12,8 +13,12 @@ export default {
         categoryList: [], // 分类列表
         banners: [],
         floors: [],
+        recommends: []
     },
     mutations: {
+        RECEIVE_RECOMMENDS(state, recommends) {
+            state.recommends = recommends
+        },
         RECEIVE_BANNERS(state, banners) {
             state.banners = banners
         },
@@ -29,6 +34,18 @@ export default {
     }, // 当前子模块的mutations
 
     actions: {
+
+        async getRecommends({
+            commit
+        }) {
+            const result = await reqRecommends()
+            if (result.code === 200) {
+                const recommends = result.data
+                commit("RECEIVE_RECOMMENDS", recommends)
+            }
+        },
+
+
         async getBanners({
             commit
         }) {
