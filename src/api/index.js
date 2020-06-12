@@ -18,3 +18,5 @@ export const reqFloors = () => mockAjax("/floors");
 export const reqRecommends = () => mockAjax("/recommends")
 
 export const reqProductList = (options) => ajax.post("/list", options);
+
+export const reqDetailInfo = (skuId) => ajax.get(`/item/${skuId}`)
