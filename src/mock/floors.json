@@ -1,9 +1,11 @@
-[{
+[
+  {
     "id|1-3": "001",
     "name|1": ["家用电器1", "家用电器2", "家用电器3"],
     "keywords": ["节能补贴", "4K电视", "空气净化器", "IH电饭煲", "滚筒洗衣机", "电热水器"],
     "imgUrl": "/images/floor-1-1.png",
-    "navList": [{
+    "navList": [
+      {
         "url": "#",
         "text": "热门"
       },
@@ -32,7 +34,8 @@
         "text": "高端电器"
       }
     ],
-    "carouselList": [{
+    "carouselList": [
+      {
         "id": "0011",
         "imgUrl": "/images/floor-1-b01.png"
       },

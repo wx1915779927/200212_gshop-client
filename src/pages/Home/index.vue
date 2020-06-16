@@ -1,27 +1,28 @@
 <template>
   <div>
-    <TypeNav />
-    <ListContainer />
-    <TodayRecommend />
-    <Rank />
-    <Like />
-    <Floor v-for="floor in floors" :key="floor.id" :floor="floor" />
-    <Brand />
+      <TypeNav />
+      <ListContainer />
+      <TodayRecommend />
+      <Rank />
+      <Like />
+      <Floor v-for="floor in floors" :key="floor.id" :floor="floor"/>
+      <Brand />
+        
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import {mapState} from 'vuex'
 
-import ListContainer from "./ListContainer/ListContainer";
-import TodayRecommend from "./TodayRecommend/TodayRecommend";
-import Rank from "./Rank/Rank";
-import Like from "./Like/Like";
-import Floor from "./Floor/Floor";
-import Brand from "./Brand/Brand";
+import ListContainer from './ListContainer/ListContainer'
+import TodayRecommend from './TodayRecommend/TodayRecommend'
+import Rank from './Rank/Rank'
+import Like from './Like/Like'
+import Floor from './Floor/Floor'
+import Brand from './Brand/Brand'
 
 export default {
-  name: "Home",
+  name: 'Home',
 
   computed: {
     ...mapState({
@@ -29,11 +30,11 @@ export default {
     })
   },
 
-  mounted() {
+  mounted () {
     // 分发给异步action请求获取楼层列表数据
-    this.$store.dispatch("getFloors");
-    this.$store.dispatch("getBanners");
-    this.$store.dispatch("getRecommends");
+    this.$store.dispatch('getFloors')
+    this.$store.dispatch('getBanners')
+    this.$store.dispatch('getRecommends')
   },
 
   // 局部注册组件 (就当前组件使用)
@@ -43,9 +44,11 @@ export default {
     Rank,
     Like,
     Floor,
-    Brand
+    Brand,
   }
-};
+}
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+
+</style>
