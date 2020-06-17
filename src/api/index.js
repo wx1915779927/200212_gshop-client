@@ -80,7 +80,10 @@ export function reqLogin(mobile, password) {
   }) */
 
   // 将ajax作为对象使用
-  return ajax.post("/user/passport/login", { mobile, password });
+  return ajax.post("/user/passport/login", {
+    mobile,
+    password
+  });
 }
 //注册
 export const reqRegister = (userInfo) =>
@@ -88,3 +91,7 @@ export const reqRegister = (userInfo) =>
 
 // 退出登录
 export const reqLogout = () => ajax("/user/passport/logout");
+
+
+//获取订单列表
+export const reqOrders = (page, limit) => ajax(`/order/auth/${page}/${limit}`)

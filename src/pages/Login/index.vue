@@ -16,20 +16,28 @@
           <div class="content">
             <form action="##">
               <div class="input-text clearFix">
-                <span></span>
+                <i></i>
                 <input
                   type="text"
                   placeholder="邮箱/用户名/手机号"
                   v-model="mobile"
+                  v-validate="{ required: true, regex: /^1\d{10}$/ }"
+                  name="phone"
+                  :class="{ invalid: errors.has('phone') }"
                 />
+                <span class="error-msg">{{ errors.first("phone") }}</span>
               </div>
               <div class="input-text clearFix">
-                <span class="pwd"></span>
+                <i class="pwd"></i>
                 <input
                   type="password"
                   placeholder="请输入密码"
                   v-model="password"
+                  name="密码"
+                  v-validate="{ required: true, min: 6, max: 10 }"
+                  :class="{ invalid: errors.has('密码') }"
                 />
+                <span class="error-msg">{{ errors.first("密码") }}</span>
               </div>
               <div class="setting clearFix">
                 <label class="checkbox inline">
@@ -98,6 +106,16 @@ export default {
       }
     },
   },
+  beforeRouteEnter: (to, from, next) => {
+    next((vm) => {
+      const token = vm.$store.state.user.userInfo.token;
+      if (token) {
+        next("/");
+      } else {
+        next();
+      }
+    });
+  },
 };
 </script>
 
@@ -165,9 +183,10 @@ export default {
           line-height: 18px;
 
           .input-text {
-            margin-bottom: 16px;
+            margin-bottom: 22px;
+            position: relative;
 
-            span {
+            i {
               float: left;
               width: 37px;
               height: 32px;
@@ -197,6 +216,15 @@ export default {
 
               border-radius: 0 2px 2px 0;
               outline: none;
+              &.invalid {
+                border: solid 1px red;
+              }
+            }
+            .error-msg {
+              position: absolute;
+              top: 100%;
+              left: 40px;
+              color: red;
             }
           }
 

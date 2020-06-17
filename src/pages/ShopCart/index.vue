@@ -43,6 +43,7 @@
               :value="item.skuNum"
               minnum="1"
               class="itxt"
+              @keyup="validInput"
               @change="
                 changeItemCount(item, $event.target.value - item.skuNum, $event)
               "
@@ -87,7 +88,7 @@
           <i class="summoney">{{ totalPrice }}</i>
         </div>
         <div class="sumbtn">
-          <a class="sum-btn" href="###" target="_blank">结算</a>
+          <router-link to="/trade" class="sum-btn">结算</router-link>
         </div>
       </div>
     </div>
@@ -121,6 +122,23 @@ export default {
     this.$store.dispatch("getCartList");
   },
   methods: {
+    validInput(event) {
+      console.log("validInput()-----");
+      // 得到输入框(0+)
+      const input = event.target;
+      // 将输入框中的开头的n个0或者n个非数字替换为空串
+      //  /^0+|\D+0*/g : 匹配 开头的1+个0 或者 任意位置的1+个非数字及后面0+个0
+      /* 
+          \D 代表非数字 
+          + 代表个数>=1
+          * 代表个数>=0
+          | 或者
+          g 找出所有匹配的
+
+          粘贴测试文本: -0a011a0110  替换后变为 11110
+        */
+      input.value = input.value.replace(/^0+|\D+0*/g, "");
+    },
     async checkCartItem(item) {
       const skuId = item.skuId;
       const isChecked = item.isChecked === 1 ? "0" : "1";
